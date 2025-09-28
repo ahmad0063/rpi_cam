@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/rpi_cam.dir/src/main.cpp.o -o rpi_cam 
