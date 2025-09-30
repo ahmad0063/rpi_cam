@@ -1,42 +1,41 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <numeric>
+#include <chrono>
+#include <thread>
+#include <Motion/MotionDetector.h>
+#include <Notification/Notifier.h>
+#include <Record/CameraRecorder.h>
 
-// Simple function to compute factorial
-int factorial(int n) {
-    if (n <= 1) return 1;
-    return n * factorial(n - 1);
-}
 
-// Function to compute average of numbers
-double average(const std::vector<int>& nums) {
-    if (nums.empty()) return 0.0;
-    return static_cast<double>(std::accumulate(nums.begin(), nums.end(), 0)) / nums.size();
-}
+enum class State { IDLE, MOTION_DETECTED };
 
 int main() {
-    std::cout << "=== Debug Test Program ===" << std::endl;
+    MotionDetector motion;
+    CameraRecorder recorder;
+    Notifier notifier;
 
-    std::vector<int> numbers = {1, 2, 3, 4, 5};
+    State state = State::IDLE;
+    int counter = 0;
 
-    // Check factorial of a number
-    int n = 5;
-    int fact = factorial(n);
-    std::cout << "Factorial of " << n << " is " << fact << std::endl;
+    while (true) {
+        switch(state) {
+            case State::IDLE:
+                std::cout << "IDLE: Waiting...\n";
+                if (motion.detectMotion()) {
+                    state = State::MOTION_DETECTED;
+                    recorder.startRecording();
+                    notifier.sendAlert("Motion detected!");
+                    counter = 0;
+                }
+                break;
 
-    // Calculate average
-    double avg = average(numbers);
-    std::cout << "Average of numbers is " << avg << std::endl;
-
-    // Print numbers with loop
-    std::cout << "Numbers: ";
-    for (int num : numbers) {
-        std::cout << num << " ";
+            case State::MOTION_DETECTED:
+                std::cout << "MOTION DETECTED: Recording...\n";
+                if (++counter > 5) {  // stay in motion state for a few cycles
+                    recorder.stopRecording();
+                    state = State::IDLE;
+                }
+                break;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
-    std::cout << std::endl;
-
-    std::cout << "=== End Program ===" << std::endl;
-
-    return 0;
 }

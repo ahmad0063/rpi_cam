@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ahmad/Desktop/rpi_cam/rpi_cam/src/main.cpp" "CMakeFiles/rpi_cam.dir/src/main.cpp.o" "gcc" "CMakeFiles/rpi_cam.dir/src/main.cpp.o.d"
+  "/home/ahmad/Desktop/rpi_cam/rpi_cam/src/test/main.cpp" "CMakeFiles/rpi_cam.dir/src/test/main.cpp.o" "gcc" "CMakeFiles/rpi_cam.dir/src/test/main.cpp.o.d"
   )
 
 # Targets to which this target links.

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/ahmad/Desktop/rpi_cam/rpi_cam/include
+CXX_INCLUDES = -I/home/ahmad/Desktop/rpi_cam/rpi_cam/include -I/home/ahmad/Desktop/rpi_cam/rpi_cam/src -I/home/ahmad/Desktop/rpi_cam/rpi_cam/src/Machine_Etat -I/home/ahmad/Desktop/rpi_cam/rpi_cam/src/Motion -I/home/ahmad/Desktop/rpi_cam/rpi_cam/src/Notification -I/home/ahmad/Desktop/rpi_cam/rpi_cam/src/Record
 
 CXX_FLAGS = -g -std=gnu++17
 
